@@ -14,68 +14,70 @@ public class Node
     {
         this.parent = parent;
         this.cost = cost;
-        this.state = new Dictionary<string, int> (allstates);
+        this.state = new Dictionary<string, int>(allstates);
         this.action = action;
     }
 }
 
 public class GPlanner
 {
-    public Queue<GAction> plan(List<GAction> actions, Dictionary<string, int> goal, WorldStates states)
-    {
+   public Queue<GAction> plan(List<GAction> actions, Dictionary<string, int> goal, WorldStates states)
+   {
         List<GAction> usableActions = new List<GAction>();
         foreach (GAction a in actions)
         {
             if (a.IsAchievable())
-            usableActions.Add(a);
+                usableActions.Add(a);
         }
 
         List<Node> leaves = new List<Node>();
-        Node start = new Node (null, 0, GWorld.Instance.GetWorld().GetStates(), null);
+        Node start = new Node(null, 0, GWorld.Instance.GetWorld().GetStates(), null);
 
-        bool success = BuildGraph(start, leaves, usableActions, goal);
+        bool sucess = BuildGraph(start, leaves, usableActions, goal);
 
-        if( !success)
+        if (!sucess)
         {
             Debug.Log("NO PLAN");
             return null;
         }
 
         Node cheapest = null;
-        foreach(Node leaf in leaves)
+        foreach (Node leaf in leaves)
         {
-            if(cheapest == null)
-            cheapest = leaf;
+            if (cheapest == null)
+                cheapest = leaf;
             else
             {
-                if(leaf.cost < cheapest.cost)
-                cheapest = leaf;
+                if (leaf.cost < cheapest.cost)
+                    cheapest = leaf;
             }
         }
+
         List<GAction> result = new List<GAction>();
         Node n = cheapest;
-        while(n != null)
+        while (n != null)
         {
-            if(n.action != null)
+            if (n.action != null)
             {
                 result.Insert(0, n.action);
             }
             n = n.parent;
         }
+
         Queue<GAction> queue = new Queue<GAction>();
-        foreach(GAction a in result)
+        foreach (GAction a in result)
         {
             queue.Enqueue(a);
         }
 
-        Debug.Log("The Plan is: ");
-        foreach(GAction a in queue)
+        Debug.Log("The Plan id: ");
+        foreach (GAction a in queue)
         {
             Debug.Log("Q: " + a.actionName);
         }
 
         return queue;
-    }
+   }
 
     private bool BuildGraph(Node parent, List<Node> leaves, List<GAction> usuableActions, Dictionary<string, int> goal)
     {
@@ -91,9 +93,9 @@ public class GPlanner
                         currentState.Add(eff.Key, eff.Value);
                 }
 
-                Node node = new Node (parent, parent.cost + action.cost, currentState, action);
+                Node node = new Node(parent, parent.cost + action.cost, currentState, action);
 
-                if (GoalAchieved(goal, currentState))
+                if(GoalAchieved(goal, currentState))
                 {
                     leaves.Add(node);
                     foundPath = true;
@@ -103,7 +105,7 @@ public class GPlanner
                     List<GAction> subset = ActionSubset(usuableActions, action);
                     bool found = BuildGraph(node, leaves, subset, goal);
                     if (found)
-                    foundPath = true;
+                        foundPath = true;
                 }
             }
         }
@@ -112,10 +114,10 @@ public class GPlanner
 
     private bool GoalAchieved(Dictionary<string, int> goal, Dictionary<string, int> state)
     {
-        foreach(KeyValuePair<string, int> g in goal)
+        foreach (KeyValuePair<string, int> g in goal)
         {
-            if(!state.ContainsKey(g.Key))
-            return false;
+            if ( !state.ContainsKey(g.Key))
+                return false;
         }
         return true;
     }
@@ -123,11 +125,12 @@ public class GPlanner
     private List<GAction> ActionSubset(List<GAction> actions, GAction removeMe)
     {
         List<GAction> subset = new List<GAction>();
-        foreach(GAction a in actions)
+        foreach (GAction a in actions)
         {
             if (!a.Equals(removeMe))
-            subset.Add(a);
+                subset.Add(a);
         }
         return subset;
     }
+
 }

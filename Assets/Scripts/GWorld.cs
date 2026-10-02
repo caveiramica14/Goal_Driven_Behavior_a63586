@@ -9,6 +9,12 @@ public sealed class GWorld
 
     static GWorld()
     {
+        world = new WorldStates();
+    }
+
+    private GWorld()
+    {
+
     }
 
     public static GWorld Instance
