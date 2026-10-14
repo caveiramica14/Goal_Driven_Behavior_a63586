@@ -3981,10 +3981,13 @@ MonoBehaviour:
   preConditions:
   - key: Waiting
     value: 0
+  - key: FreeCubicle
+    value: 0
   afterEffects:
   - key: treatPatient
     value: 0
   agent: {fileID: 0}
+  inventory: {fileID: 0}
   running: 0
 --- !u!114 &1974219169
 MonoBehaviour:
@@ -3999,6 +4002,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actions: []
+  inventory: {fileID: 0}
   currentAction: {fileID: 0}
 --- !u!1 &1999376859
 GameObject:
