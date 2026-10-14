@@ -53,7 +53,7 @@ public sealed class GWorld
 
     public bool HasCubicles
     {
-        get { return patients.Count > 0; }
+        get { return cubicles.Count > 0; }
     }
 
     public GameObject RemoveCubicle()

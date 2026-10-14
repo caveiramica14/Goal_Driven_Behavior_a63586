@@ -6,7 +6,7 @@ public class Nurse : GAgent
 {
     SubGoal treatPatientGoal;
 
-    void Start()
+    new void Start()
     {
         base.Start();
         treatPatientGoal = new SubGoal("treatPatient", 1, true);

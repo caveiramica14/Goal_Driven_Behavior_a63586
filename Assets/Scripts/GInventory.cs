@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GInventory : MonoBehaviour
+[System.Serializable]
+public class GInventory
 {
     List<GameObject> items = new List<GameObject>();
 
@@ -25,16 +26,6 @@ public class GInventory : MonoBehaviour
 
     public void RemoveItem(GameObject i)
     {
-        int indexToRemove = -1;
-        foreach(GameObject g in items)
-        {
-            indexToRemove++;
-            if (g == i)
-            {
-                break;
-            }
-            if (indexToRemove >= -1)
-                items.RemoveAt(indexToRemove);
-        }
+        items.Remove(i);
     }
 }
