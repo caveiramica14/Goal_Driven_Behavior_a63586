@@ -2726,6 +2726,7 @@ GameObject:
   - component: {fileID: 551985464}
   - component: {fileID: 291521711286258755}
   - component: {fileID: -6942278023100868481}
+  - component: {fileID: -783068196701660997}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -2784,6 +2785,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   actions: []
+  inventory: {fileID: 0}
   currentAction: {fileID: 0}
 --- !u!114 &551985461
 MonoBehaviour:
@@ -2807,6 +2809,7 @@ MonoBehaviour:
   - key: hasArrived
     value: 0
   agent: {fileID: 0}
+  inventory: {fileID: 0}
   running: 0
 --- !u!114 &551985464
 MonoBehaviour:
@@ -2832,6 +2835,7 @@ MonoBehaviour:
   - key: isWaiting
     value: 0
   agent: {fileID: 0}
+  inventory: {fileID: 0}
   running: 0
 --- !u!114 &291521711286258755
 MonoBehaviour:
@@ -2870,6 +2874,33 @@ MonoBehaviour:
   - key: hasRegistered
     value: 0
   agent: {fileID: 0}
+  inventory: {fileID: 0}
+  running: 0
+--- !u!114 &-783068196701660997
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61b442f02fd64b44bb96e158e6df6a2a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GetTreated
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 0
+  preConditions:
+  - key: atHospital
+    value: 0
+  afterEffects:
+  - key: isTreated
+    value: 0
+  agent: {fileID: 0}
+  inventory: {fileID: 0}
   running: 0
 --- !u!1 &7927236269272520591
 GameObject:
